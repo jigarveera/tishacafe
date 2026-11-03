@@ -1,4 +1,4 @@
-const common = { viewBox: '0 0 80 80', fill: 'none', xmlns: 'http://www.w3.org/2000/svg', 'aria-hidden': true }
+const common = { viewBox: '0 0 80 80', fill: 'none', xmlns: 'http://www.w3.org/2000/svg', 'aria-hidden': true, style: { transform: 'scale(0.75)', transformOrigin: 'center' } }
 
 export default function StoreCategoryIcon({ type, className = 'size-16' }) {
   if (type === 'BURGERS') return <svg {...common} className={className}>
