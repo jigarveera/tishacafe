@@ -1,20 +1,37 @@
-import React, { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { StoreProvider } from './context/StoreContext.jsx'
+import Header from './components/layout/Header.jsx'
+import Footer from './components/layout/Footer.jsx'
+import IslandNav from './components/layout/IslandNav.jsx'
+import AccountSheet from './components/layout/AccountSheet.jsx'
+import CartSheet from './components/layout/CartSheet.jsx'
+import Loader from './components/ui/Loader.jsx'
 
-// lazy loaded page imports
-const HomePage = lazy(() => import('./components/pages/HomePage.jsx'));
+const HomePage = lazy(() => import('./components/pages/HomePage.jsx'))
+const SearchPage = lazy(() => import('./components/pages/SearchPage.jsx'))
+const StorePage = lazy(() => import('./components/pages/StorePage.jsx'))
+const ProductPage = lazy(() => import('./components/pages/ProductPage.jsx'))
+const LikedPage = lazy(() => import('./components/pages/LikedPage.jsx'))
 
-// loader import
-import Loader from './components/ui/Loader.jsx';
-
-const App = () => {
-  return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-      </Routes>
-    </Suspense>
-  )
+export default function App() {
+  const { pathname } = useLocation()
+  return <StoreProvider>
+    <div className="min-h-screen bg-cream-100 font-sans text-coffee-900 transition-colors duration-500 dark:bg-night-950 dark:text-cream-100">
+      {!pathname.startsWith('/store') && pathname !== '/search' && <Header />}
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/store" element={<StorePage />} />
+          <Route path="/store/:id" element={<ProductPage />} />
+          <Route path="/liked" element={<LikedPage />} />
+        </Routes>
+      </Suspense>
+      <Footer />
+      <IslandNav />
+      <AccountSheet />
+      <CartSheet />
+    </div>
+  </StoreProvider>
 }
-
-export default App

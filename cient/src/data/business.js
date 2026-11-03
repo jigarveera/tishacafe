@@ -1,0 +1,57 @@
+// Source-aware research snapshot. Confirm mutable details with the cafe before publishing.
+export const business = Object.freeze({
+  name: 'Tisha Cafe',
+  location: Object.freeze({
+    address: 'Shop 25, Tanishka Vikrant Building, Ward N, R.B Mehta Road, Ghatkopar East, Mumbai',
+    locality: 'Ghatkopar East',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    country: 'India',
+    postalCode: '400077',
+    timezone: 'Asia/Kolkata',
+  }),
+  contact: Object.freeze({
+    phoneDisplay: '+91 90047 89358',
+    phoneE164: '+919004789358',
+    instagramHandle: '@tishacafe_',
+    instagramUrl: 'https://www.instagram.com/tishacafe_/',
+    email: null,
+  }),
+  links: Object.freeze({
+    district: 'https://www.district.in/dining/mumbai/tisha-cafe-ghatkopar-east',
+    zomato: 'https://www.zomato.com/mumbai/tisha-cafe-ghatkopar-east/info',
+    directions: 'https://www.google.com/maps/search/?api=1&query=Tisha+Cafe+Shop+25+Tanishka+Vikrant+Building+Ghatkopar+East+Mumbai',
+  }),
+  identity: Object.freeze({
+    advertisedGrandOpeningDate: '2026-06-19',
+    advertisedGrandOpeningNote: 'Noon onwards; live music advertised from 6 PM',
+    legalEstablishmentDate: null,
+    owner: null,
+    instagramManager: null,
+    recruitmentContact: 'Priyanka',
+    recruitmentContactRole: 'Contact person on a housekeeping job listing only',
+  }),
+  servicesAsListed: Object.freeze(['dine-in', 'takeaway', 'delivery']),
+  hours: Object.freeze({
+    confirmed: null,
+    instagramBioReported: '7:30 AM–3:00 AM',
+    districtAndZomatoListed: '9:00 AM–11:45 PM and 12:00 AM–2:00 AM, daily',
+    dineIn: null,
+    kitchen: null,
+    delivery: null,
+    note: 'Published schedules conflict. Call the cafe before relying on late-night hours.',
+  }),
+  menu: Object.freeze({
+    currency: 'INR',
+    zomatoIndexedRows: 181,
+    districtPhotographedRows: 94,
+    districtPricedOptions: 151,
+    approvedLiveCatalog: null,
+  }),
+  sources: Object.freeze({
+    district: 'https://www.district.in/dining/mumbai/tisha-cafe-ghatkopar-east',
+    zomato: 'https://www.zomato.com/mumbai/tisha-cafe-ghatkopar-east/info',
+    recruitment: 'https://www.jobhai.com/housekeeping-house-keeping-staff-job-in-tisha-cafe-ghatkopar-east-mumbai-0-to-2-years-1791189114-8463710-jid',
+    instagram: 'https://www.instagram.com/tishacafe_/',
+  }),
+})

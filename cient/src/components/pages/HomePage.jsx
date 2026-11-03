@@ -1,16 +1,26 @@
-import React from 'react'
+import { ArrowRight, ArrowUpRight, Clock3, MapPin, Phone, Search, Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import HeroSection from '../sections/HeroSection.jsx'
+import GallerySection from '../sections/GallerySection.jsx'
+import VoicesSection from '../sections/VoicesSection.jsx'
+import FaqSection from '../sections/FaqSection.jsx'
+import MenuCard from '../ui/MenuCard.jsx'
+import { featuredItems, menuCategories } from '../../data/menuPreview.js'
+import { business } from '../../data/business.js'
 
-const HomePage = () => {
-  return (
-    <div
-    id='home-page'
-    className='w-full h-screen flex justify-center items-center bg-gray-100'>
-        <p
-        className='text-2xl sm:text-4xl text-gray-800'> 
-            hello 
-        </p>
-    </div>
-  )
+export default function HomePage() {
+  return <main id="home-page">
+    <HeroSection />
+    <section className="relative z-10 mx-auto -mt-3 max-w-7xl px-5 sm:px-8"><div className="grid gap-3 rounded-[30px] border border-white/75 bg-white/65 p-3 shadow-[0_20px_60px_rgba(48,39,31,.1)] backdrop-blur-2xl sm:grid-cols-3 dark:border-white/10 dark:bg-night-800/75"><div className="flex items-center gap-3 rounded-[22px] bg-cream-200/60 p-4 dark:bg-white/5"><span className="grid size-11 place-items-center rounded-2xl bg-sage-200 text-sage-800 dark:bg-sage-800 dark:text-sage-200"><MapPin size={21} /></span><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-coffee-500 dark:text-cream-300">Find us</p><p className="text-sm font-bold">Ghatkopar East, Mumbai</p></div></div><div className="flex items-center gap-3 rounded-[22px] bg-cream-200/60 p-4 dark:bg-white/5"><span className="grid size-11 place-items-center rounded-2xl bg-sage-200 text-sage-800 dark:bg-sage-800 dark:text-sage-200"><Sparkles size={21} /></span><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-coffee-500 dark:text-cream-300">Explore</p><p className="text-sm font-bold">Momos, pizza & more</p></div></div><div className="flex items-center gap-3 rounded-[22px] bg-cream-200/60 p-4 dark:bg-white/5"><span className="grid size-11 place-items-center rounded-2xl bg-sage-200 text-sage-800 dark:bg-sage-800 dark:text-sage-200"><Clock3 size={21} /></span><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-coffee-500 dark:text-cream-300">Planning a visit?</p><p className="text-sm font-bold">Call to confirm hours</p></div></div></div></section>
+    <section className="mx-auto max-w-7xl px-5 py-18 sm:px-8 sm:py-24"><div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end"><div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-sage-700 dark:text-sage-300">The menu, a little closer</p><h2 className="mt-3 font-serif text-5xl font-semibold leading-none tracking-tight sm:text-6xl">Pick your <span className="italic text-sage-700 dark:text-sage-300">craving.</span></h2><p className="mt-4 max-w-lg text-sm leading-6 text-coffee-600 dark:text-cream-300">A few picks from the photographed District menu. Browse the full preview and save what you want to try.</p></div><Link to="/store" className="inline-flex items-center gap-2 rounded-full border border-coffee-200 bg-white/70 px-5 py-3 text-sm font-bold text-coffee-800 backdrop-blur-xl dark:border-white/15 dark:bg-white/5 dark:text-cream-100">View the store <ArrowUpRight size={17} /></Link></div>
+      <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{featuredItems.map((item) => <MenuCard key={item.id} item={item} />)}</div>
+      <div className="mt-11 flex flex-wrap gap-2">{menuCategories.slice(0, 8).map((category) => <Link key={category.id} to={`/search?category=${encodeURIComponent(category.id)}`} className="rounded-full border border-sage-300/70 bg-sage-50 px-4 py-2.5 text-xs font-bold text-sage-800 transition hover:bg-sage-200 dark:border-sage-700 dark:bg-sage-900/30 dark:text-sage-200">{category.label}</Link>)}</div>
+    </section>
+    <GallerySection />
+    <section className="mx-auto grid max-w-7xl gap-8 px-5 py-18 sm:px-8 sm:py-24 lg:grid-cols-[.9fr_1.1fr] lg:items-center"><div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-sage-700 dark:text-sage-300">Make a plan, make a memory</p><h2 className="mt-3 font-serif text-5xl font-semibold leading-none tracking-tight sm:text-6xl">Good days start with <span className="italic text-sage-700 dark:text-sage-300">a place.</span></h2><p className="mt-5 max-w-md text-sm leading-7 text-coffee-600 dark:text-cream-300">Find us on R.B. Mehta Road. Explore the menu first, then drop by for the real thing.</p><div className="mt-7 flex flex-wrap gap-3"><a href={business.links.directions} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-sage-700 px-6 py-3.5 text-sm font-bold text-white dark:bg-sage-300 dark:text-night-950">Get directions <ArrowUpRight size={17} /></a><a href={`tel:${business.contact.phoneE164}`} className="inline-flex items-center gap-2 rounded-full border border-coffee-200 bg-white/70 px-6 py-3.5 text-sm font-bold dark:border-white/15 dark:bg-white/5"><Phone size={17} /> Call us</a></div></div><motion.div whileHover={{ rotateY: -2, y: -4 }} className="rounded-[34px] border border-white/75 bg-white/60 p-7 shadow-[0_22px_60px_rgba(48,39,31,.1)] backdrop-blur-2xl [transform-style:preserve-3d] dark:border-white/10 dark:bg-white/5"><div className="flex items-start gap-4"><div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sage-200 text-sage-800 dark:bg-sage-800 dark:text-sage-200"><MapPin size={23} /></div><div><p className="text-xs font-bold uppercase tracking-[.16em] text-sage-700 dark:text-sage-300">Tisha Café</p><p className="mt-2 font-serif text-2xl font-bold leading-7">{business.location.address}</p></div></div><div className="mt-7 border-t border-coffee-200/70 pt-6 dark:border-white/10"><p className="flex items-center gap-2 text-sm font-bold"><Clock3 size={17} /> A note on hours</p><p className="mt-2 text-sm leading-6 text-coffee-600 dark:text-cream-300">Online listings currently disagree about opening and late-night hours. Please call {business.contact.phoneDisplay} before heading over, especially after midnight.</p></div></motion.div></section>
+    <VoicesSection />
+    <FaqSection />
+    <section className="bg-sage-700 py-18 text-white dark:bg-sage-900 sm:py-24"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-7 px-5 sm:px-8 lg:flex-row lg:items-center"><div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-sage-200">One more good idea</p><h2 className="mt-3 max-w-2xl font-serif text-5xl font-semibold leading-none tracking-tight sm:text-6xl">See what sounds good <span className="italic text-sage-200">today.</span></h2></div><Link to="/search" className="inline-flex w-fit items-center gap-3 rounded-full bg-cream-50 px-7 py-4 text-sm font-bold text-sage-900 shadow-xl transition hover:-translate-y-1"><Search size={17} /> Search the menu <ArrowRight size={17} /></Link></div></section>
+  </main>
 }
-
-export default HomePage

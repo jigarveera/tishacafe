@@ -1,13 +1,12 @@
-import React from 'react'
 import { Loader2Icon } from 'lucide-react';
 
 const Loader = () => {
   return (
     <div
     id='loader'
-    className='w-full h-screen flex justify-center items-center bg-gray-100'>
+    className='flex min-h-screen w-full items-center justify-center bg-cream-100 dark:bg-night-950'>
       <Loader2Icon
-      className='size-16 sm:size-24 text-gray-800 animate-spin' />
+      className='size-16 animate-spin text-coffee-700 sm:size-24 dark:text-sage-300' />
     </div>
   )
 }
