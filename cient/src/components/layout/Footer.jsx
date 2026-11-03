@@ -2,10 +2,10 @@ import { ArrowUpRight, Camera, MapPin, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { business } from '../../data/business.js'
 
-export default function Footer() {
-  return <footer className="relative overflow-hidden bg-coffee-800 pb-36 pt-16 text-cream-100 sm:pb-32 dark:bg-night-900">
+export default function Footer({ compact = false }) {
+  return <footer className={`relative overflow-hidden bg-coffee-800 pb-36 text-cream-100 sm:pb-32 sm:pt-16 dark:bg-night-900 ${compact ? 'pt-[22px]' : 'pt-16'}`}>
     <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-sage-400/10 blur-3xl" />
-    <div className="relative mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.5fr_1fr_1fr]">
+    <div className={`relative mx-auto grid max-w-7xl px-5 sm:gap-12 sm:px-8 lg:grid-cols-[1.5fr_1fr_1fr] ${compact ? 'gap-11' : 'gap-12'}`}>
       <div>
         <p className="font-serif text-6xl font-bold tracking-[-.09em] text-cream-100">tisha<span className="ml-2 text-2xl font-normal italic tracking-normal text-sage-300">café</span></p>
         <p className="mt-5 max-w-sm text-sm leading-7 text-cream-200/80">A little place to pause, sip and stay awhile in Ghatkopar East. Explore the menu, save your picks and plan your next visit.</p>
@@ -28,6 +28,6 @@ export default function Footer() {
         <p className="mt-5 text-xs leading-5 text-cream-300/70">Hours differ across listings. Please call before planning a late visit.</p>
       </div>
     </div>
-    <div className="relative mx-auto mt-14 flex max-w-7xl flex-col justify-between gap-3 border-t border-white/15 px-5 pt-6 text-xs text-cream-300/60 sm:flex-row sm:px-8"><span>© {new Date().getFullYear()} Tisha Cafe concept experience</span><span>Menu prices and images are preview material pending café approval.</span></div>
+    <div className={`relative mx-auto flex max-w-7xl flex-col justify-between gap-3 border-t border-white/15 px-5 text-xs text-cream-300/60 sm:mt-14 sm:flex-row sm:px-8 sm:pt-6 ${compact ? 'mt-[22px] pt-[22px]' : 'mt-14 pt-6'}`}><span>© {new Date().getFullYear()} Tisha Cafe concept experience</span><span>Menu prices and images are preview material pending café approval.</span></div>
   </footer>
 }

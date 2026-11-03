@@ -33,7 +33,7 @@ export default function StoreSearchBar({ query: controlledQuery, onQueryChange }
     navigate(query.trim() ? `/search?q=${encodeURIComponent(query.trim())}` : '/search')
   }
 
-  return <section aria-label="Store search" className="sticky top-0 z-40 border-b border-white/60 bg-cream-100/85 py-2.5 backdrop-blur-2xl dark:border-white/10 dark:bg-night-950/85">
+  return <section aria-label="Store search" className="sticky top-0 z-40 border-b border-white/60 bg-cream-100/85 py-2.5 backdrop-blur-2xl lg:top-20 dark:border-white/10 dark:bg-night-950/85">
     <form onSubmit={submit} role="search" className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4">
       <div className="flex h-13 min-w-0 flex-1 items-center gap-3 rounded-full border border-white/85 bg-white/75 px-4 shadow-[0_10px_30px_rgba(48,39,31,.07),inset_0_1px_0_rgba(255,255,255,.9)] focus-within:ring-2 focus-within:ring-sage-400 backdrop-blur-2xl dark:border-white/10 dark:bg-white/7">
         <button type="submit" aria-label="Search the menu" className="grid size-7 shrink-0 place-items-center text-coffee-700 dark:text-cream-200"><Search size={20} /></button>

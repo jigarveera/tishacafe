@@ -7,7 +7,6 @@ import { cutoutsByItemId, storeCategories, storeRows } from '../../data/storeVis
 import { useStore } from '../../context/store.js'
 import StoreCategoryIcon from '../ui/StoreCategoryIcon.jsx'
 import StoreProductCard from '../ui/StoreProductCard.jsx'
-import StoreHeader from '../layout/StoreHeader.jsx'
 import StoreSearchBar from '../layout/StoreSearchBar.jsx'
 import CategoryFadeSection from '../layout/CategoryFadeSection.jsx'
 import cafePoster from '../../assets/food/cafe-table-concept.webp'
@@ -42,8 +41,9 @@ function PosterCarousel() {
   </section>
 }
 
-function Categories() {
-  return <CategoryFadeSection label="Food categories"><div className="mx-auto w-full max-w-6xl px-4"><div className="flex w-full snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5">{storeCategories.map((category, index) => <Link key={category.id} to={`/search?category=${encodeURIComponent(category.id)}`} className="group flex w-[82px] shrink-0 snap-start flex-col items-center gap-2 sm:w-[110px]"><span className={`${index === 0 ? 'bg-sage-700 dark:bg-sage-500' : 'bg-night-900 dark:bg-night-800'} grid size-19 place-items-center rounded-[23px] shadow-[0_12px_24px_rgba(48,39,31,.16)] transition group-hover:-translate-y-1 group-hover:shadow-[0_17px_25px_rgba(48,39,31,.2)] sm:size-23`}><StoreCategoryIcon type={category.id} className="size-16 sm:size-18" /></span><span className={`${index === 0 ? 'text-sage-700 dark:text-sage-300' : 'text-coffee-800 dark:text-cream-200'} text-xs font-semibold`}>{category.label}</span></Link>)}</div></div>
+function Categories({ vertical = false }) {
+  if (vertical) return <nav aria-label="Food categories" className="max-h-[calc(100vh-170px)] overflow-y-auto rounded-[28px] border border-white/70 bg-cream-50/70 p-2.5 shadow-[0_16px_40px_rgba(48,39,31,.1)] backdrop-blur-2xl dark:border-white/10 dark:bg-night-900/80">{storeCategories.map((category) => <Link key={category.id} to={`/search?category=${encodeURIComponent(category.id)}`} className="group flex items-center gap-2.5 rounded-2xl p-2 text-xs font-bold text-coffee-800 transition hover:bg-sage-100 dark:text-cream-100 dark:hover:bg-white/10"><span className="grid size-11 shrink-0 place-items-center rounded-xl bg-night-900 dark:bg-night-800"><StoreCategoryIcon type={category.id} className="size-9" /></span><span className="truncate">{category.label}</span></Link>)}</nav>
+  return <CategoryFadeSection label="Food categories" className="md:hidden"><div className="mx-auto w-full max-w-6xl px-4"><div className="flex w-full snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{storeCategories.map((category, index) => <Link key={category.id} to={`/search?category=${encodeURIComponent(category.id)}`} className="group flex w-[82px] shrink-0 snap-start flex-col items-center gap-2"><span className={`${index === 0 ? 'bg-sage-700 dark:bg-sage-500' : 'bg-night-900 dark:bg-night-800'} grid size-19 place-items-center rounded-[23px] shadow-[0_12px_24px_rgba(48,39,31,.16)] transition group-hover:-translate-y-1 group-hover:shadow-[0_17px_25px_rgba(48,39,31,.2)]`}><StoreCategoryIcon type={category.id} className="size-16" /></span><span className={`${index === 0 ? 'text-sage-700 dark:text-sage-300' : 'text-coffee-800 dark:text-cream-200'} text-xs font-semibold`}>{category.label}</span></Link>)}</div></div>
   </CategoryFadeSection>
 }
 
@@ -78,25 +78,29 @@ function PopularFood() {
     }, 4700)
     return () => window.clearInterval(timer)
   }, [reducedMotion])
-  return <section aria-labelledby="popular-heading" className="mx-auto w-full max-w-6xl px-4 pt-11 sm:pt-16"><h2 id="popular-heading" className="font-serif text-4xl font-bold sm:text-5xl">Popular food</h2>
-    <div className="mx-auto -mt-1 w-full max-w-[560px]"><div ref={trackRef} className="flex w-full snap-x snap-mandatory overflow-x-auto pb-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{popularItems.map((item) => <div key={item.id} className="min-w-full snap-center px-1"><PopularCard item={item} /></div>)}</div></div>
+  return <section aria-labelledby="popular-heading" className="mx-auto w-full max-w-6xl px-4 pt-8 sm:pt-16"><h2 id="popular-heading" className="font-serif text-4xl font-bold sm:text-5xl">Popular food</h2>
+    <div className="mx-auto -mt-1 w-full max-w-[560px]"><div ref={trackRef} className="flex w-full snap-x snap-mandatory overflow-x-auto pb-9 sm:pb-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{popularItems.map((item) => <div key={item.id} className="min-w-full snap-center px-1"><PopularCard item={item} /></div>)}</div></div>
   </section>
 }
 
 function FoodRow({ row }) {
   const items = row.ids.map((id) => menuItems.find((item) => item.id === id)).filter(Boolean)
   const href = row.searchCategory ? `/search?category=${encodeURIComponent(row.searchCategory)}` : '/search'
-  return <section aria-labelledby={`${row.id}-heading`} className="mx-auto w-full max-w-6xl px-4 pt-6 sm:pt-9"><div className="flex items-end justify-between gap-4"><h2 id={`${row.id}-heading`} className="font-serif text-4xl font-bold sm:text-5xl">{row.label}</h2><Link to={href} className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-sage-700 dark:text-sage-300">See all <ArrowUpRight size={15} /></Link></div><div className="mt-2 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-14 pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{items.map((item) => <StoreProductCard key={item.id} item={item} />)}</div></section>
+  return <section aria-labelledby={`${row.id}-heading`} className="mx-auto w-full max-w-6xl px-4 pt-6 sm:pt-9"><div className="flex items-end justify-between gap-4"><h2 id={`${row.id}-heading`} className="font-serif text-4xl font-bold sm:text-5xl">{row.label}</h2><Link to={href} className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-sage-700 dark:text-sage-300">See all <ArrowUpRight size={15} /></Link></div><div className="mt-2 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-11 sm:pb-14 sm:pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{items.map((item) => <StoreProductCard key={item.id} item={item} />)}</div></section>
 }
 
 export default function StorePage() {
   return <main className="relative w-full bg-[radial-gradient(circle_at_10%_10%,rgba(203,206,188,.48),transparent_28%),radial-gradient(circle_at_90%_42%,rgba(225,210,190,.44),transparent_28%)] pb-30 dark:bg-[radial-gradient(circle_at_10%_10%,rgba(80,85,69,.26),transparent_28%),radial-gradient(circle_at_90%_42%,rgba(79,64,51,.2),transparent_28%)]">
-    <StoreHeader />
     <StoreSearchBar />
+    <div className="mx-auto w-full max-w-7xl md:grid md:grid-cols-[176px_minmax(0,1fr)] md:items-start md:gap-4 md:px-4">
+    <aside className="hidden md:sticky md:top-[73px] md:block lg:top-[153px]"><Categories vertical /></aside>
+    <div className="min-w-0">
     <PosterCarousel />
     <Categories />
     <PopularFood />
     {storeRows.map((row) => <FoodRow key={row.id} row={row} />)}
     <p className="mx-auto max-w-6xl px-4 pt-8 text-xs leading-5 text-coffee-500 dark:text-cream-300">Menu names and printed prices come from District menu photos and need café confirmation. Food imagery is concept art for this preview.</p>
+    </div>
+    </div>
   </main>
 }

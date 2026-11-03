@@ -12,6 +12,10 @@ Generated with the built-in ImageGen tool on 2 November 2026, then converted to 
 
 Source PNGs are preserved by ImageGen under the Codex generated images directory. The WebP files in this workspace are the selected site assets.
 
+## Local reels
+
+Three MP4 files in `src/assets/reels` are used in the home page voice carousel. Their individual Instagram post URLs were not supplied, so each reel card opens Tisha Cafe's Instagram profile.
+
 ## Store card cutouts
 
 Built-in ImageGen made these five transparent assets for the layered store cards, then they were converted to alpha-preserving WebP:
